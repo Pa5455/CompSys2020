@@ -31,6 +31,6 @@ Thingspeak as IOT platform (will investigate others but this seems to be good en
 Python as hard coding language for Arduino etc.  JavaScript for web site, use of glitch if can get to revisit the ICT labs.
 
 ## Project Repository
-TODO: Create a repository for your project. You can add this proposal to it!
+Pa5455/CompSys2020/Project_Proposal.md
 
 
