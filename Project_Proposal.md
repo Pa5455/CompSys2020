@@ -19,7 +19,7 @@ Arduino not used as not neccessary. I have not included scraping weather data. T
 
 Python used on PI, javascript, html and css used in web app and data stored in Database
 
-
+## Original Proposal
 I am leaving the scope open slightly as to how far I can push up the grading spectrum, with the 5 points below I can easily work form baseline to excellent/outstanding, which is how I am going to approach this assignment, once I have a good mark I can push it on more, and have all iterations saved in GIT repo. 
 
 1) Water will come from a rain barrel, syphoned into the polytunnel water distribution system. A sensor in the rain barrel will show how much water is present in barrel. A simple relay valve will control the water flow, on or off. The duration of the valve opening time will depend on the volume of water in the barrel, as less volume is expected to come out when water is at low levels, this can be calibrated and either fed back to IOT platform such as ThingSpeak to run calculation on how long the relay valve should be left open, or else run it in code. I will avoid using moisture sensors as want to keep wires in ground to a minimum. (Future proofing for my automatic weeding robot!)
