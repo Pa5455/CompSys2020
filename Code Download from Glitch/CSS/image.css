@@ -1,0 +1,36 @@
+.primary_images {       
+  width: 100%;
+  height: 100%;
+  float: left;
+  margin: 10px;
+}
+
+.secondary_images{
+  display: block;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.cows_eating {         
+  display: block;            
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 1%;
+}
+
+.bale_stack {        
+  display: block;
+  width: 0%;
+  margin-left: auto;
+  margin-right: auto
+}
+
+#back_img{                                                /*main background image on each page*/
+  background-image: url("https://cdn.glitch.com/d3dde600-1ff4-4de9-87d9-e11a42f510bc%2FTomatoe_plant.jpg?v=1609779220608");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  } 

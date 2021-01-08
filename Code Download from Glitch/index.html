@@ -1,0 +1,290 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/CSS/mycss.css" />
+    <title>Green_house</title>
+  </head>
+  <body id="back_img">
+    <div class="container">
+      <div id="header">
+        <h1>
+          My Tomatoe Plants
+        </h1>
+      </div>
+      
+      <div id="maincontent">
+        <div id="primary">
+          <body>
+            <p></p>
+            <h1>
+              GreenHouse Automate Back ground/project Proposal
+            </h1>
+            <p>
+              This project is to set up a smart polytunnel. Automation of plant
+              watering and temp/humidity monitoring, adding camera functionality
+              and giving user some data on plant growth vs. climatic conditions
+              etc. Rescoped project from original proposal: Camera functionality
+              to take a period snap shot, store shot in firebase database,
+              inlcude a reference object in background. This database of images
+              can then be accessed at anytime and used for postprocess analysis,
+              such as comparing temp trends and growth rate and may watering
+              amounts. As a cool side effect a time lapse could be made
+              filtering out a selecting of images. ALso my web app will take the
+              latest snapshot from firebase and display it on screen.
+            </p>
+            <p>
+              Auto_Watering as planned, user can specify what the dialy water
+              dosage is to be via web app, they select 0 if they want it to be
+              off, and then 0.5 incements up to 2 litres. The frequency of
+              watering is set in Thingspeak time control. Water level in tank is
+              also displayed on web app (MQTT to thingsspeak and then iframe
+              HTML elememt taken from things speak to web app. The daily ammount
+              set is done via html button sending a channel update in
+              thingsspeak. The raspberry pi then requests a get url from the
+              thingspeak channel fiels taking the last entry and passsing it
+              into the watering function. The watering will now use a 12V pump
+              activated by a 12V relay normaly open. Conditions set in the
+              python software will not allow the pump to be activted if tank is
+              empty, and also the user gets a tweet when level is getting low.
+              In the python code. The tank is a drum stored inside the poly
+              tunnel, as the water can naturally be warmed up creating less
+              shock.
+            </p>
+
+            <p>
+              Some research on Tomatoe growing conditions, found that a Vapor
+              Presure decifit of 0.9 to 1.2 kPA was ideal growing conditions. A
+              calculation channel using MATLAB analysis in thingsspeak can run a
+              calculation based on temp and humidity to give the vapor pressure
+              decifit output in Pa. The user will be notified when outside this
+              range and can then go and act to remidy this.
+            </p>
+
+            <p>
+              There is automatic vent control, a servo is actiaved and when
+              above a temperature threshold. Python code looks after the
+              automation, but thingspeak does monitor if vent is open or closed
+              (via MQTT). If temp goes further beyond threshold user gets an
+              alert and then can take further action, maybe a mist or big fan.
+            </p>
+            <p>
+              Door state is monitored by push button, if the button is activated
+              (pushed by door) then a signal is sent with the door state, the
+              user can see this on the web app or in the things speak channels.
+              If the door is open an alert is also sent to the user, which they
+              can ignore if they actually have opened the door.
+            </p>
+
+            <p>
+              Arduino not used as originally planned,not neccessary as Raspberry
+              Pi has enough GPIO. I have not included scraping weather data. The
+              data collected can be used in a database for following year, so
+              maybe water ammount required can be estimated. Python used on PI,
+              javascript, html and css used in web app and data stored in
+              Database
+            </p>
+            <div>
+              <h1>Project graphics</h1>
+              <img
+                src="https://cdn.glitch.com/d3dde600-1ff4-4de9-87d9-e11a42f510bc%2F05517834_project_grahic.001.jpeg?v=1610054213403"
+                class="primary_images"
+              />
+
+              <h1>What actually is Vapor pressure Deficit</h1>
+              <p>
+                VPD is the difference between the amount of moisture in the air
+                and how much moisture the air can hold when it is saturated.
+              </p>
+
+              <p>
+                There is an optimum level for VPD,For leafy
+                greens and culinary herbs, which prefer a lower VPD, the
+                accepted VPD range is 0.65 to 0.9 kilopascal (kPa) with 0.85 kPA
+                being optimum. Tomatoes, cucumbers and peppers tend to like it
+                drier. The VPD range for tomatoes is 0.9 to 1.2 kPa. For leafy
+                greens there is more surface area for moisture to escape the
+                plants. The plants like to be in a more humid space so they
+                don't release too much moisture too fast.
+              </p>
+              
+              <h1>
+                Project Video
+              </h1>
+            </div>
+          </body>
+        </div>
+
+        <div id="secondary">
+          <body>
+            <div id="myData"></div>
+            <button type="submit" onclick="refreshPage()">
+              Click here to refresh readings
+            </button>
+            <script>
+              fetch(
+                "https://thingspeak.com/channels/1265472/fields/1/last.json"
+              )
+                .then(function(response) {
+                  return response.json();
+                })
+                .then(function(data) {
+                  appendData(data);
+                })
+                .catch(function(err) {
+                  console.log("error: " + err);
+                });
+              function appendData(data) {
+                var mainContainer = document.getElementById("myData");
+                var div = document.createElement("div");
+                div.innerHTML = "Last_Entry_point@: " + data.created_at;
+                mainContainer.appendChild(div);
+              }
+              function refreshPage() {
+                window.location.reload();
+              }
+            </script>
+
+            <div>
+              <h1>Set ammount of water for daily water feed</h1>
+
+              <form
+                action="https://api.thingspeak.com/update?api_key=K89UM98Z1CQD03BA&field8=0.0"
+                method="get"
+                target="_blank"
+              >
+                <button type="submit" formmethod="post">
+                  Auto_Water_OFF
+                </button>
+              </form>
+
+              <form
+                action="https://api.thingspeak.com/update?api_key=K89UM98Z1CQD03BA&field8=0.5"
+                method="get"
+                target="_blank"
+              >
+                <button type="submit" formmethod="post">
+                  Auto_Water_0.5 litres
+                </button>
+              </form>
+
+              <form
+                action="https://api.thingspeak.com/update?api_key=K89UM98Z1CQD03BA&field8=1.0"
+                method="get"
+                target="_blank"
+              >
+                <button type="submit" formmethod="post">
+                  Auto_Water_1.0 litres
+                </button>
+              </form>
+
+              <form
+                action="https://api.thingspeak.com/update?api_key=K89UM98Z1CQD03BA&field8=1.5"
+                method="get"
+                target="_blank"
+              >
+                <button type="submit" formmethod="post">
+                  Auto_Water_2.0 litres
+                </button>
+              </form>
+            </div>
+          </body>
+          <h1>
+            Parameter Monitoring
+          </h1>
+          <div>
+            <iframe
+              width="450"
+              height="260"
+              style="border: 1px solid #cccccc;"
+              display="inline-block"
+              src="https://thingspeak.com/channels/1265472/widgets/257343"
+            ></iframe>
+            <iframe
+              width="450"
+              height="260"
+              style="border: 1px solid #cccccc;"
+              display="inline-block"
+              src="https://thingspeak.com/channels/1265472/widgets/257354"
+            ></iframe>
+          </div>
+          <div>
+            <iframe
+              width="450"
+              height="260"
+              style="border: 1px solid #cccccc;"
+              display="inline-block"
+              src="https://thingspeak.com/channels/1265472/widgets/256201"
+            ></iframe>
+            <iframe
+              width="450"
+              height="260"
+              style="border: 1px solid #cccccc;"
+              display="inline-block"
+              src="https://thingspeak.com/channels/1265472/widgets/255936"
+            ></iframe>
+          </div>
+          <div>
+            <div>
+              <iframe
+                width="450"
+                height="260"
+                style="border: 1px solid #cccccc;"
+                display="inline-block"
+                src="https://thingspeak.com/channels/1265472/widgets/256202"
+              ></iframe>
+
+              <div>
+                <h2>
+                  Vent Open Alert
+                </h2>
+              </div>
+              <iframe
+                width="450"
+                height="260"
+                style="border: 1px solid #cccccc;"
+                display="inline-block"
+                src="https://thingspeak.com/channels/1265472/widgets/256203"
+              ></iframe>
+              <h2>
+                Door Open Alert
+              </h2>
+            </div>
+            <iframe
+              width="450"
+              height="260"
+              style="border: 1px solid #cccccc;"
+              display="inline-block"
+              src="https://thingspeak.com/channels/1265472/widgets/256194"
+            ></iframe>
+          </div>
+          <div>
+            <link rel="stylesheet" href="/style.css" />
+            <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+            <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+            <!-- Add Firebase products that you want to use -->
+            <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
+            <!-- import the webpage's javascript file -->
+            <script src="/script.js"></script>
+
+            <body>
+              <h1>PLANT IMAGE</h1>
+
+              <p>
+                PIMAGE TAKEN OF PLANT 1 @ <span id="time"></span>:
+                <br />
+                <img id="photo" />
+              </p>
+            </body>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p>
+          WIT Hdip CompSys 2020 Networking IOT project for Assignment 2 Patrick
+          Curran 05517834
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

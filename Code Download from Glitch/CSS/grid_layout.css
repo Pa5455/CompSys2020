@@ -1,0 +1,32 @@
+.container {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  padding-bottom: 5%;
+  padding-top: 2%;
+}
+
+#header {
+  grid-column-start: 2;
+  grid-column-end: span 1;
+}
+
+#navigation {
+  grid-column-start: 2;
+  text-align: center;
+  padding:5%;
+}
+
+#maincontent {
+  grid-column-start: 2;
+  display: grid;
+  grid-template-columns: 60% 38%;
+  grid-gap: 2%;
+}
+
+#primary {
+  grid-column-start: 1;
+}
+
+#secondary {
+  grid-column-start: 2;
+}

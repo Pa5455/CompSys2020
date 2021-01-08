@@ -1,0 +1,48 @@
+#primary{
+	background-color: powderblue;
+	border-radius: 350px 50px; 
+	opacity: 0.95;
+	font-size: 25;
+	padding: 5%;
+	
+
+}
+
+#secondary{
+	background-color: powderblue;
+	border-radius: 150px 50px; 
+	opacity: 0.95;
+	font-size: 25;
+	font-weight: bold;
+	color: green;
+  text-align: center;
+	padding: 5%;
+}
+
+.footer{
+	color: white;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: green;
+	text-align: center;
+}
+
+#button_inline{
+  display= inline_block;
+}
+
+#header{
+ 
+	border: 5px solid black;
+	border-radius: 200px 50px; 
+  padding-bottom:5%;
+	
+	opacity: 0.95;
+	font-size: 50;
+  color: yellow;
+	background-size: auto;
+	text-align: center;
+	background-color: darkblue;
+}
